@@ -45,7 +45,10 @@ export default function PDFPowerhouse() {
     setIsGenerating(true);
     try {
       const result = await generateDocument({ topic });
-      setPages(result.pages);
+     setPages(result.pages.map((page: any, index: number) => ({
+  ...page,
+  id: page.id || `page-${index}` 
+})));
       toast({
         title: "Architecture Complete",
         description: `Drafted 20-page executive publication for "${result.title}".`,
